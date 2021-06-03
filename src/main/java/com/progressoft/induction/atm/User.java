@@ -88,7 +88,7 @@ public class User implements ATM, BankingSystem {
 
     public static void main(String[] args) {
         User user = new User();
-        System.out.println(user.withdraw("111111111", new BigDecimal("1000")));
+        System.out.println(user.withdraw("111111111", new BigDecimal("500")));
     }
 }
 
