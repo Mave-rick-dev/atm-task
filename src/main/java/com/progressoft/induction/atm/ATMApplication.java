@@ -1,6 +1,7 @@
 package com.progressoft.induction.atm;
 
 import com.google.gson.Gson;
+import com.progressoft.induction.atm.enums.Banknote;
 import com.progressoft.induction.atm.serviceImpl.ATMImpl;
 import com.progressoft.induction.atm.serviceImpl.BankingSystemImpl;
 import java.math.BigDecimal;

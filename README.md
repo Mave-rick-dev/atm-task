@@ -2,15 +2,15 @@
 
 ### ATM
 The Automated Teller Machine (ATM) is a convenient way for bank customers to withdraw money at any time, A simple ATM is 
-represented in the interface `com.progressoft.induction.atm.ATM`. The ATM has a single method `withdraw()` that accepts 
+represented in the interface `com.progressoft.induction.atm.service.ATM`. The ATM has a single method `withdraw()` that accepts 
 the account number from which you want to withdraw and the amount of money.
 
 When a user attempts to withdraw money from the ATM, it should check if the user have enough money in his/her account, 
-The `com.progressoft.induction.atm.BankingSystem` interface provides the ability to check the account balance through 
+The `com.progressoft.induction.atm.service.BankingSystem` interface provides the ability to check the account balance through 
 the `getAccountBalance()` method. The interface also provides the ability to debit the account, i.e. deducting the 
 withdrawn amount from the account.
 
-The `withdraw()` method from the `com.progressoft.induction.atm.ATM` interface should return the money to the user only 
+The `withdraw()` method from the `com.progressoft.induction.atm.service.ATM` interface should return the money to the user only 
 after verifying enough money in the account and debiting the requested amount from the account. 
 `com.progressoft.induction.atm.exceptions.InsufficientFundsException` should be thrown if the account did not have 
 enough  money in it.

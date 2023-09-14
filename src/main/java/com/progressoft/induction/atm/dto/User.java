@@ -1,4 +1,4 @@
-package com.progressoft.induction.atm;
+package com.progressoft.induction.atm.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

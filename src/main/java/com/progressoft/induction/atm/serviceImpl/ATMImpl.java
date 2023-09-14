@@ -1,13 +1,13 @@
 package com.progressoft.induction.atm.serviceImpl;
 
-import com.progressoft.induction.atm.ATM;
-import com.progressoft.induction.atm.Banknote;
+import com.progressoft.induction.atm.service.ATM;
+import com.progressoft.induction.atm.enums.Banknote;
 import com.progressoft.induction.atm.exceptions.InsufficientFundsException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.progressoft.induction.atm.Banknote.banknoteEnumMap;
+import static com.progressoft.induction.atm.enums.Banknote.banknoteEnumMap;
 
 public class ATMImpl implements ATM {
 

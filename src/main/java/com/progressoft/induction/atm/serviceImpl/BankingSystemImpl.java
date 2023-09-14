@@ -1,14 +1,14 @@
 package com.progressoft.induction.atm.serviceImpl;
 
-import com.progressoft.induction.atm.BankingSystem;
-import com.progressoft.induction.atm.Banknote;
-import com.progressoft.induction.atm.User;
+import com.progressoft.induction.atm.service.BankingSystem;
+import com.progressoft.induction.atm.enums.Banknote;
+import com.progressoft.induction.atm.dto.User;
 import com.progressoft.induction.atm.exceptions.AccountNotFoundException;
 import com.progressoft.induction.atm.exceptions.NotEnoughMoneyInATMException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import static com.progressoft.induction.atm.User.accountRecords;
+import static com.progressoft.induction.atm.dto.User.accountRecords;
 
 public class BankingSystemImpl implements BankingSystem {
     @Override
@@ -38,7 +38,10 @@ public class BankingSystemImpl implements BankingSystem {
 
     @Override
     public void checkATMBalance(BigDecimal withdrawAmount) {
-        if(Banknote.getTotalAmount().compareTo(withdrawAmount) < 0)
+        BigDecimal totalAmount = Banknote.getTotalAmount();
+        if(totalAmount.compareTo(withdrawAmount) < 0){
+            System.out.println(totalAmount);
             throw new NotEnoughMoneyInATMException();
+        }
     }
 }

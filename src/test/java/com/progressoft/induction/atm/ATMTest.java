@@ -1,8 +1,10 @@
 package com.progressoft.induction.atm;
 
+import com.progressoft.induction.atm.enums.Banknote;
 import com.progressoft.induction.atm.exceptions.AccountNotFoundException;
 import com.progressoft.induction.atm.exceptions.NotEnoughMoneyInATMException;
 import com.progressoft.induction.atm.exceptions.InsufficientFundsException;
+import com.progressoft.induction.atm.service.ATM;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

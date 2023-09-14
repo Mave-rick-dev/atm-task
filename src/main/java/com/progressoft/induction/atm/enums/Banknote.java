@@ -1,4 +1,4 @@
-package com.progressoft.induction.atm;
+package com.progressoft.induction.atm.enums;
 
 import lombok.Getter;
 import java.math.BigDecimal;
