@@ -5,6 +5,8 @@ import com.progressoft.induction.atm.exceptions.AccountNotFoundException;
 import com.progressoft.induction.atm.exceptions.NotEnoughMoneyInATMException;
 import com.progressoft.induction.atm.exceptions.InsufficientFundsException;
 import com.progressoft.induction.atm.service.ATM;
+import com.progressoft.induction.atm.serviceImpl.ATMImpl;
+import com.progressoft.induction.atm.serviceImpl.BankingSystemImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,8 @@ class ATMTest {
     @BeforeEach
     void setUp() {
         //TODO: initialize the atm here
-        atm = null;
+        BankingSystemImpl bankingSystem = new BankingSystemImpl();
+        atm = new ATMImpl(bankingSystem);
     }
 
     @Test
@@ -37,7 +40,7 @@ class ATMTest {
     @Test
     void whenWithdrawAmountLargerThanWhatInMachine_thenShouldThrowException() {
         atm.withdraw("123456789", new BigDecimal("1000.0"));
-        atm.withdraw("111111111", new BigDecimal("1000.0"));
+        atm.withdraw("111111111", new BigDecimal("650.0"));
 
         Assertions.assertThrows(NotEnoughMoneyInATMException.class,
                 () -> atm.withdraw("444444444", new BigDecimal("500.0")));

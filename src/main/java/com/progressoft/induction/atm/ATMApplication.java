@@ -17,7 +17,7 @@ public class ATMApplication {
         System.out.println((new Gson().toJson(withdraw1)));
 
         List<Banknote> withdraw2 =
-                atm.withdraw("111111111", new BigDecimal("650.0"));
+                atm.withdraw("111111111", new BigDecimal("600.0"));
         System.out.println((new Gson().toJson(withdraw2)));
 
         List<Banknote> withdraw3 =

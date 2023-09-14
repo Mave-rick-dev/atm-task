@@ -6,7 +6,6 @@ import com.progressoft.induction.atm.exceptions.InsufficientFundsException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-
 import static com.progressoft.induction.atm.enums.Banknote.banknoteEnumMap;
 
 public class ATMImpl implements ATM {
