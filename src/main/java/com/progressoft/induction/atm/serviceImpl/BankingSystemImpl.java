@@ -1,9 +1,10 @@
 package com.progressoft.induction.atm.serviceImpl;
 
 import com.progressoft.induction.atm.BankingSystem;
+import com.progressoft.induction.atm.Banknote;
 import com.progressoft.induction.atm.User;
 import com.progressoft.induction.atm.exceptions.AccountNotFoundException;
-
+import com.progressoft.induction.atm.exceptions.NotEnoughMoneyInATMException;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -33,5 +34,11 @@ public class BankingSystemImpl implements BankingSystem {
                 user.setAvailableBalance(user.getAvailableBalance().subtract(amount));
             }
         }
+    }
+
+    @Override
+    public void checkATMBalance(BigDecimal withdrawAmount) {
+        if(Banknote.getTotalAmount().compareTo(withdrawAmount) < 0)
+            throw new NotEnoughMoneyInATMException();
     }
 }

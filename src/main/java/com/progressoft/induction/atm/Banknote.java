@@ -26,6 +26,13 @@ public enum Banknote {
         this.value = value;
     }
 
+    public static BigDecimal getTotalAmount() {
+        BigDecimal sum = new BigDecimal("0.0");
+        for (Banknote banknote : Banknote.values()) {
+            sum = sum.add(banknote.value.multiply(new BigDecimal(banknoteEnumMap.get(banknote))));
+        }
+        return sum;
+    }
 
 }
 

@@ -7,4 +7,6 @@ public interface BankingSystem {
     BigDecimal getAccountBalance(String accountNumber);
 
     void debitAccount(String accountNumber, BigDecimal amount);
+
+    void checkATMBalance(BigDecimal withdrawAmount);
 }

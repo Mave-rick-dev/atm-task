@@ -2,12 +2,12 @@ package com.progressoft.induction.atm.serviceImpl;
 
 import com.progressoft.induction.atm.ATM;
 import com.progressoft.induction.atm.Banknote;
-import com.progressoft.induction.atm.User;
+import com.progressoft.induction.atm.exceptions.InsufficientFundsException;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.progressoft.induction.atm.Banknote.banknoteEnumMap;
-import static com.progressoft.induction.atm.User.accountRecords;
 
 public class ATMImpl implements ATM {
 
@@ -21,34 +21,27 @@ public class ATMImpl implements ATM {
     public List<Banknote> withdraw(String accountNumber, BigDecimal withdrawAmount) {
         BigDecimal availableBalance = bankingSystem.getAccountBalance(accountNumber);
 
-        for(User user: accountRecords){
-            if(user.getAccountNumber().equals(accountNumber)){
-                availableBalance = user.getAvailableBalance();
-            }
-        }
-
         final BigDecimal minimumWithdrawAmount = new BigDecimal("5.0");
 
+        if (withdrawAmount.compareTo(availableBalance) > 0) throw new InsufficientFundsException();
 
-        if(withdrawAmount.compareTo(availableBalance) > 0)
-            throw new RuntimeException("Insufficient balance!!");
-
-        if(withdrawAmount.compareTo(minimumWithdrawAmount) < 0 && withdrawAmount.remainder(minimumWithdrawAmount).compareTo(BigDecimal.ZERO) != 0)
+        if (withdrawAmount.compareTo(minimumWithdrawAmount) < 0 && withdrawAmount.remainder(minimumWithdrawAmount).compareTo(BigDecimal.ZERO) != 0)
             throw new RuntimeException("Amount must be greater than 5 and divisible by 5!!");
+
+        bankingSystem.checkATMBalance(withdrawAmount);
 
         ArrayList<Banknote> withdrawBankNotes = new ArrayList<>();
         BigDecimal remainingAmount = withdrawAmount;
 
-        for(Banknote banknote: Banknote.values()){
-            while(remainingAmount.compareTo(banknote.getValue()) >= 0 &&  banknoteEnumMap.get(banknote) > 0){
-                remainingAmount = remainingAmount.subtract(banknote.getValue());
-                banknoteEnumMap.put(banknote, banknoteEnumMap.get(banknote) - 1);
-                withdrawBankNotes.add(banknote);
+        do {
+            for (Banknote banknote : Banknote.values()) {
+                if (remainingAmount.compareTo(banknote.getValue()) >= 0 && banknoteEnumMap.get(banknote) > 0) {
+                    remainingAmount = remainingAmount.subtract(banknote.getValue());
+                    banknoteEnumMap.put(banknote, banknoteEnumMap.get(banknote) - 1);
+                    withdrawBankNotes.add(banknote);
+                }
             }
-        }
-
-        if(remainingAmount.compareTo(BigDecimal.ZERO) != 0 )
-            throw new RuntimeException("Insufficient funds in ATM!!");
+        } while (remainingAmount.compareTo(BigDecimal.ZERO) != 0);
 
         bankingSystem.debitAccount(accountNumber, withdrawAmount);
         return withdrawBankNotes;
